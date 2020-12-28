@@ -1,5 +1,9 @@
 <template>
+
   <div class="login">
+
+  <img class="logo" alt="logo VALE" src="../../public/LOGO_ASOC_VALE.svg">
+
     <form action="action_page.php" method="post">
       <div class="container">
         <label for="uname"><b>Username</b></label>
@@ -17,6 +21,11 @@
 <style scoped>
 h3 {
   margin: 40px 0 0;
+}
+
+.logo{
+  width: 20%;
+  height: 20%;
 }
 
 /* Bordered form */
