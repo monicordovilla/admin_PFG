@@ -1,8 +1,17 @@
 <template>
   <div class="header">
-    <p>
-      Header
-    </p>
+  <div class="botones">
+    <button>
+      Persona
+    </button>
+    <button>
+      Facilitador
+    </button>
+  </div>
+
+  <button class="logout">
+    Cerrar sesión
+  </button>
   </div>
 </template>
 
@@ -22,6 +31,24 @@ export default {
   text-align: center;
   color: blanchedalmond;
   background-color: #619A8A;
-  font-size: 30px;
+}
+
+button{
+  background-color: white;
+  color: teal;
+  display: inline;
+  height: 50px;
+  width: 150px;
+  font-size: medium;
+  margin: 10px;
+}
+
+.botones{
+  display: inline-block;
+}
+
+.logout{
+  float: right;
+
 }
 </style>

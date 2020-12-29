@@ -1,7 +1,15 @@
 <template>
   <div class="home">
     <Header />
-    <img alt="Vue logo" src="../assets/logo.png">
+    <div>
+      <h1>Administración</h1>
+      <button>
+        Persona
+      </button>
+      <button>
+        Facilitador
+      </button>
+    </div>
   </div>
 </template>
 
@@ -16,3 +24,25 @@ export default {
   }
 }
 </script>
+
+<style>
+.home{
+  display: block;
+}
+
+h1{
+  display: block;
+  font-size: 50px;
+}
+
+button{
+  display: block;
+  margin-top: 25px;
+  margin-left: 100px;
+  height: 70px;
+  width: 200px;
+  font-size: large;
+  background-color: #619A8A;
+  color: white;
+}
+</style>
