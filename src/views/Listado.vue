@@ -1,17 +1,17 @@
 <template>
-  <div class="home">
-    <Header />
-    <div>
-      <h1>Listado</h1>
-      <button class="crear">
-        Crear persona
-      </button>
-      
-    <input type="search" v-model="buscar" class="form-control" placeholder="Nombre, apellidos"/>
+    <div class="home">
+        <Header />
+        <div>
+        <h1>Listado</h1>
+        <button class="crear">
+            Crear persona
+        </button>
+        
+        <!--v-model="buscar"-->
+            <input type="search" class="form-control" placeholder="Nombre, apellidos"/>
+        </div>
+        <CajaInfo v-for="(numero, index) in numeros" :key="index" />
     </div>
-
-    <CajaInfo />
-  </div>
 </template>
 
 <script>
@@ -24,6 +24,12 @@ export default {
   components: {
     Header,
     CajaInfo
+  },
+  data: function(){
+      return{
+        number: 5,
+        numeros: [1,2,3,4,5,6]
+      }
   }
 }
 </script>
@@ -33,11 +39,5 @@ export default {
     float: right;
     width: 150px;
     height: 50px;
-}
-
-.bloque{
-    background-color: azure;
-    margin: 5%;
-    text-align: left;
 }
 </style>
