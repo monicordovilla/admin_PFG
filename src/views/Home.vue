@@ -3,10 +3,12 @@
     <Header />
     <div>
       <h1>Administración</h1>
-      <button>
-        Persona
-      </button>
-      <button>
+      <router-link to="/listado">
+        <button class="boton-ini">
+          Persona
+        </button>
+      </router-link>
+      <button class="boton-ini">
         Facilitador
       </button>
     </div>
@@ -35,7 +37,7 @@ h1{
   font-size: 50px;
 }
 
-button{
+.boton-ini{
   display: block;
   margin-top: 25px;
   margin-left: 100px;

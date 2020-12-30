@@ -1,12 +1,18 @@
 <template>
   <div class="bloque">
     Nombre    Teléfono
-    <br><br>
-    Apellidos
-
-    <button>
+    <br>
+    <button class="boton">
         <img class="option" src="../assets/recycle-bin.png">
     </button>
+    <button class="boton">
+        <img class="option" src="../assets/pencil.png">
+    </button>
+    <button class="boton">
+        <img class="option" src="../assets/vincular.png">
+    </button>
+    <br>
+    Apellidos
   </div>
 </template>
 
@@ -14,6 +20,11 @@
 export default {
   name: 'CajaInfo',
   props: {
+  },
+  data: function(){
+      return{
+        facilitador: Boolean,
+      }
   }
 }
 </script>
@@ -30,8 +41,11 @@ export default {
     width: 20px;
 }
 
-button{
-    height: 30px;
-    width: 30px;
+.boton{
+  float: right;
+  height: 30px;
+  width: 30px;
+  background-color: #619A8A;
+  color: white;
 }
 </style>

@@ -11,6 +11,9 @@
             <input type="search" class="form-control" placeholder="Nombre, apellidos"/>
         </div>
         <CajaInfo v-for="(numero, index) in numeros" :key="index" />
+
+        <div>Icons made by <a href="https://www.flaticon.con.com/authors/prosymbols" title="Prosymbols">Prosymbols</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+
     </div>
 </template>
 
@@ -39,5 +42,8 @@ export default {
     float: right;
     width: 150px;
     height: 50px;
+    font-size: large;
+    background-color: #619A8A;
+    color: white;
 }
 </style>
