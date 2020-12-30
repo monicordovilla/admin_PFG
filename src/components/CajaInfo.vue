@@ -17,8 +17,10 @@
 </template>
 
 <script>
+
 export default {
   name: 'CajaInfo',
+ 
   props: {
   },
   data: function(){

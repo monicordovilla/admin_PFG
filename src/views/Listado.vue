@@ -8,7 +8,7 @@
         </button>
         
         <!--v-model="buscar"-->
-            <input type="search" class="form-control" placeholder="Nombre, apellidos"/>
+        <input type="search" class="form-control" placeholder="Nombre, apellidos"/>
         </div>
         <CajaInfo v-for="(numero, index) in numeros" :key="index" />
 
@@ -45,5 +45,17 @@ export default {
     font-size: large;
     background-color: #619A8A;
     color: white;
+}
+
+.form-control{
+  background-image: url('../assets/lupa.png');
+  background-position: 6px 6px;
+  background-size: 3%;
+  background-repeat: no-repeat;
+  width: 80%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
 }
 </style>
