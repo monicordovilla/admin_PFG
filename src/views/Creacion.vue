@@ -4,10 +4,10 @@
         <div>
             <h1 v-if="this.$route.params.user == 'facilitador'"> Crear facilitador</h1>
             <h1 v-else>Crear persona</h1> 
-            <input v-model="nombre" type="text" class="form-control" placeholder="Nombre"/>
-            <input v-model="apellidos" type="text" class="form-control" placeholder="Apellidos"/>
-            <input v-model="telefono" type="text" class="form-control" placeholder="Telefono"/>
-            <input v-model="correo" type="text" class="form-control" placeholder="e-mail"/>
+            <input v-model="nombre" type="text" class="form" placeholder="Nombre"/>
+            <input v-model="apellidos" type="text" class="form" placeholder="Apellidos"/>
+            <input v-model="telefono" type="text" class="form" placeholder="Telefono"/>
+            <input v-model="correo" type="text" class="form" placeholder="e-mail"/>
             <br><label class="pss">Contraseña</label><br>
             <div class="grid">
                 <img class="pic" alt="camaras" src="../assets/Password/camera-4091991_1280.png">
@@ -22,6 +22,8 @@
                 <img class="pic" alt="flores" src="../assets/Password/witch-155291_1280.png">
                 <img class="pic" alt="flores" src="../assets/Password/woman-5716875_1920.png">
             </div>
+
+            <button class="add">Crear</button>
         </div>
     </div>
 </template>
@@ -45,7 +47,15 @@ export default {
 </script>
 
 <style>
-.form-control{
+.add{
+    width: 150px;
+    height: 50px;
+    font-size: large;
+    background-color: #619A8A;
+    color: white;
+}
+
+.form{
   width: 80%;
   font-size: 16px;
   padding: 12px 20px 12px 40px;

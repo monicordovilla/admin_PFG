@@ -2,15 +2,11 @@
   <div class="bloque">
     Nombre    Teléfono
     <br>
-    <button class="boton">
-        <img class="option" src="../assets/recycle-bin.png">
-    </button>
-    <button class="boton">
-        <img class="option" src="../assets/pencil.png">
-    </button>
-    <button v-if="this.$route.params.user == 'facilitador'" class="boton">
-        <img class="option" src="../assets/vincular.png">
-    </button>
+    <button class="boton" id="borrar"></button>
+
+    <button class="boton" id="modificar"></button>
+
+    <button v-if="this.$route.params.user == 'facilitador'" @click="goVincular()" class="boton" id="vincular"></button>
     <br>
     Apellidos
   </div>
@@ -27,6 +23,11 @@ export default {
       return{
         facilitador: Boolean,
       }
+  },
+  methods:{
+    goVincular() {
+      this.$router.push("/vincular");
+    }
   }
 }
 </script>
@@ -49,5 +50,26 @@ export default {
   width: 30px;
   background-color: #619A8A;
   color: white;
+}
+
+#borrar{
+  background-image: url(../assets/recycle-bin.png);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 80%;
+}
+
+#modificar{
+  background-image: url(../assets/pencil.png);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 80%;
+}
+
+#vincular{
+  background-image: url(../assets/vincular.png);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: 80%;
 }
 </style>

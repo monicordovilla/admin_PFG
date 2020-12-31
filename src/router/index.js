@@ -27,6 +27,11 @@ const routes = [
     path: '/crear/:user',
     name: 'Creacion',
     component: () => import('../views/Creacion.vue')
+  },
+  {
+    path: '/vincular',
+    name: 'Vincular',
+    component: () => import('../views/Vincular.vue')
   }
 ]
 

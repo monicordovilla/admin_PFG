@@ -12,6 +12,7 @@
         Facilitador
       </button>
 
+      <div class="mencion">Icons made by <a href="https://www.flaticon.com/authors/prosymbols" title="Prosymbols">Prosymbols</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </div>
   </div>
 </template>
@@ -58,5 +59,12 @@ h1{
   font-size: large;
   background-color: #619A8A;
   color: white;
+}
+
+.mencion{
+  position:absolute;
+  width:100%;
+  bottom: 1px;
+  align: right;
 }
 </style>
