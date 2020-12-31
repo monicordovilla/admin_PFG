@@ -1,10 +1,10 @@
 <template>
   <div class="header">
   <div class="botones">
-    <button>
+    <button @click="goPersona(true)">
       Persona
     </button>
-    <button>
+    <button @click="goPersona(false)">
       Facilitador
     </button>
   </div>
@@ -19,6 +19,12 @@
 export default {
   name: 'Header',
   props: {
+  },
+  methods: {
+    goPersona(bool) {
+      if (bool) this.$router.push("/listado/persona");
+      else this.$router.push("/listado/facilitador");
+    }
   }
 }
 </script>

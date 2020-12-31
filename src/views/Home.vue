@@ -3,14 +3,15 @@
     <Header />
     <div>
       <h1>Administración</h1>
-      <router-link to="/listado">
-        <button class="boton-ini">
-          Persona
-        </button>
-      </router-link>
-      <button class="boton-ini">
+
+      <button @click="goPersona(true)" class="boton-ini">
+        Persona
+      </button>
+
+      <button @click="goPersona(false)" class="boton-ini">
         Facilitador
       </button>
+
     </div>
   </div>
 </template>
@@ -23,6 +24,17 @@ export default {
   name: 'Home',
   components: {
     Header
+  },
+  data: function(){
+      return{
+        facilitador: Boolean
+      }
+  },
+  methods: {
+    goPersona(bool) {
+      if (bool) this.$router.push("/listado/persona");
+      else this.$router.push("/listado/facilitador");
+    }
   }
 }
 </script>

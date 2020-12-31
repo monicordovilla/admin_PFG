@@ -8,7 +8,7 @@
     <button class="boton">
         <img class="option" src="../assets/pencil.png">
     </button>
-    <button class="boton">
+    <button v-if="this.$route.params.user == 'facilitador'" class="boton">
         <img class="option" src="../assets/vincular.png">
     </button>
     <br>

@@ -2,7 +2,8 @@
     <div class="home">
         <Header />
         <div>
-        <h1>Listado</h1>
+        <h1 v-if="this.$route.params.user == 'facilitador'">Facilitador</h1>
+        <h1 v-else>Persona</h1>
         <button class="crear">
             Crear persona
         </button>
