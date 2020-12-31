@@ -10,17 +10,17 @@
             <input v-model="correo" type="text" class="form" placeholder="e-mail"/>
             <br><label class="pss">Contraseña</label><br>
             <div class="grid">
-                <img class="pic" alt="camaras" src="../assets/Password/camera-4091991_1280.png">
+                <img class="pic" alt="camaras" src="../assets/Password/camera.png">
                 <img class="pic" alt="casete" src="../assets/Password/casette-4398267_1280.png">
-                <img class="pic" alt="gato" src="../assets/Password/cat-4637643_1920.jpg">
+                <img class="pic" alt="gato" src="../assets/Password/cat.png">
 
                 <img class="pic" alt="flores" src="../assets/Password/flowers-5548043_1920.jpg">
-                <img class="pic" alt="camaras" src="../assets/Password/phone-4986359_1920.jpg">
-                <img class="pic" alt="casete" src="../assets/Password/pumpkin-5711688_1920.jpg">
+                <img class="pic" alt="abuela" src="../assets/Password/phone-4986359_1920.jpg">
+                <img class="pic" alt="calabaza" src="../assets/Password/pumpkin-5711688_1920.jpg">
 
-                <img class="pic" alt="gato" src="../assets/Password/santa-claus-5812443_1920.jpg">
-                <img class="pic" alt="flores" src="../assets/Password/witch-155291_1280.png">
-                <img class="pic" alt="flores" src="../assets/Password/woman-5716875_1920.png">
+                <img class="pic" alt="navidad" src="../assets/Password/santa-claus-5812443_1920.jpg">
+                <img class="pic" alt="bruja" src="../assets/Password/witch-155291_1280.png">
+                <img class="pic" alt="telefono" src="../assets/Password/woman-5716875_1920.png">
             </div>
 
             <button class="add">Crear</button>
