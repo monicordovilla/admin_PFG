@@ -22,6 +22,11 @@ const routes = [
     path: '/listado/:user',
     name: 'Listado',
     component: () => import('../views/Listado.vue')
+  },
+  {
+    path: '/crear/:user',
+    name: 'Creacion',
+    component: () => import('../views/Creacion.vue')
   }
 ]
 
