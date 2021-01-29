@@ -12,11 +12,21 @@
         <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" v-model="psw" required>
 
-        <button type="submit">Login</button>
+        <button @click="goHome()">Login</button>
       </div>
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  methods:{
+    goHome() {
+      this.$router.push("/");
+    }
+  }
+}
+</script>
 
 <style scoped>
 h3 {
