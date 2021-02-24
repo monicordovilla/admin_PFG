@@ -4,27 +4,54 @@
 
   <img class="logo" alt="logo VALE" src="../../public/LOGO_ASOC_VALE.svg">
 
-    <form action="action_page.php" method="post">
+    <form @submit.prevent="doLogin">
       <div class="container">
-        <label for="uname"><b>Username</b></label>
-        <input type="text" placeholder="Enter Username" v-model="uname" required>
+        <label><b>Correo</b></label>
+        <input type="text" placeholder="Introduzca su correo" v-model="userData.email" required>
 
-        <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" v-model="psw" required>
+        <label><b>Contraseña</b></label>
+        <input type="password" placeholder="Introduzca su contraseña" v-model="userData.password" required>
 
-        <button @click="goHome()">Login</button>
+        <button type="submit">Login</button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
+
 export default {
+  name: 'Login',
+
+  data() {
+    return {
+      userData: {
+        email: "",
+        password: ""
+      }
+    };
+  },
+
   methods:{
     goHome() {
-      this.$router.push("/");
-    }
+      this.$router.push({ name: "Home" });
+    },
 
+    async doLogin() {
+      try {
+        await this.$store.dispatch("user/doLogin", {
+          email: this.userData.email,
+          password: this.userData.password
+        });
+        console.log("Sesion iniciada")
+
+        this.$router.push({ name: "Home" });
+
+      } catch (error) {
+        console.log("No puedes")
+        console.error(error.message);
+      }
+    },
   }
 }
 </script>

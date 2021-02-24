@@ -9,22 +9,39 @@
     </button>
   </div>
 
-  <button class="logout">
+  <button @click="doLogout()" class="logout">
     Cerrar sesión
   </button>
   </div>
 </template>
 
 <script>
+import {mapState} from "vuex";
 export default {
   name: 'Header',
+
   props: {
   },
+
   methods: {
     goPersona(bool) {
       if (bool) this.$router.push("/listado/persona");
       else this.$router.push("/listado/facilitador");
+    },
+
+    async doLogout() {
+      try {
+        await this.$store.dispatch("user/doLogout");
+        this.$router.push({ name: "Login" });
+        console.log("Logged out");
+      } catch (error) {
+        console.error(error.message);
+      }
     }
+  },
+
+  computed: {
+    ...mapState("user", ["user"])
   }
 }
 </script>

@@ -65,6 +65,9 @@ h1{
   position:absolute;
   width:100%;
   bottom: 1px;
-  align: right;
+}
+
+button{
+  border-radius: .5rem;
 }
 </style>

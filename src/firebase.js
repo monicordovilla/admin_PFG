@@ -9,18 +9,20 @@ import "firebase/storage";
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-    apiKey: "AIzaSyAQP0Mlk0CFhxGV0IxsrgQU12UfuTCeGNk",
-    authDomain: "actividades-vale.firebaseapp.com",
-    projectId: "actividades-vale",
-    storageBucket: "actividades-vale.appspot.com",
-    messagingSenderId: "32273505683",
-    appId: "1:32273505683:web:2b7570f344af38e654dc66",
-    measurementId: "G-6K4JYEF3J6"
+  apiKey: "AIzaSyAQP0Mlk0CFhxGV0IxsrgQU12UfuTCeGNk",
+  authDomain: "actividades-vale.firebaseapp.com",
+  databaseURL: "https://actividades-vale-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "actividades-vale",
+  storageBucket: "actividades-vale.appspot.com",
+  messagingSenderId: "32273505683",
+  appId: "1:32273505683:web:2b7570f344af38e654dc66",
+  measurementId: "G-6K4JYEF3J6"
 };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
+export const fb = firebase;
 export const db = firebase.firestore();
 export const auth = firebase.auth();
 export const storage = firebase.storage();
