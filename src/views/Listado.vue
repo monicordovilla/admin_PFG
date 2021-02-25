@@ -1,18 +1,19 @@
 <template>
     <div class="home">
         <Header class="fijar-header"/>
-        <div>
-        <h1 v-if="this.$route.params.user == 'facilitador'">Facilitador</h1>
-        <h1 v-else>Persona</h1>
-        <button @click="goCreacion(false)" v-if="this.$route.params.user == 'facilitador'" class="crear" >
-            Crear facilitador
-        </button>
-        <button @click="goCreacion(true)" v-else class="crear" >
-            Crear persona
-        </button>
-        
-        <!--v-model="buscar"-->
-        <input type="search" class="form-control" placeholder="Nombre, apellidos"/>
+
+        <div class="listado">
+          <h1 v-if="this.$route.params.user == 'facilitador'">Facilitador</h1>
+          <h1 v-else>Persona</h1>
+          <button @click="goCreacion(false)" v-if="this.$route.params.user == 'facilitador'" class="crear" >
+              Crear facilitador
+          </button>
+          <button @click="goCreacion(true)" v-else class="crear" >
+              Crear persona
+          </button>
+          
+          <!--v-model="buscar"-->
+          <input type="search" class="form-control" placeholder="Nombre, apellidos"/>
         </div>
         <CajaInfo v-for="(numero, index) in numeros" :key="index" /> 
     </div>
@@ -52,6 +53,10 @@ body{
 .fijar-header{
   position: sticky;
   top: 0;
+}
+
+.listado{
+  margin: 0 5%;
 }
 
 .crear{

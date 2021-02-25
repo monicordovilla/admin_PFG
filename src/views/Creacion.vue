@@ -6,8 +6,7 @@
             <h1 v-else>Crear persona</h1> 
             <input v-model="nombre" type="text" class="form" placeholder="Nombre"/>
             <input v-model="apellidos" type="text" class="form" placeholder="Apellidos"/>
-            <input v-model="telefono" type="text" class="form" placeholder="Telefono"/>
-            <input v-model="correo" type="text" class="form" placeholder="e-mail"/>
+            <input v-model="apodo" type="text" class="form" placeholder="Apodo"/>
             <br><label class="pss">Contraseña</label><br>
             <div class="grid">
                 <img class="pic" alt="camaras" src="../assets/Password/camera.png">
