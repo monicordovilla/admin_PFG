@@ -33,8 +33,9 @@ export default {
       try {
         await this.$store.dispatch("user/doLogout");
         this.$router.push({ name: "Login" });
-        console.log("Logged out");
+        this.$toast.success("Sesion cerrada")
       } catch (error) {
+        this.$toast.error("No se ha podido cerrar sesión")
         console.error(error.message);
       }
     }

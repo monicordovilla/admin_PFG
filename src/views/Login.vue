@@ -43,12 +43,13 @@ export default {
           email: this.userData.email,
           password: this.userData.password
         });
-        console.log("Sesion iniciada")
+        this.$toast.success("Sesion iniciada")
 
         this.$router.push({ name: "Home" });
 
       } catch (error) {
-        console.log("No puedes")
+        this.$toast.error("No se ha podido iniciar sesión")
+        console.log("No se ha podido iniciar sesión")
         console.error(error.message);
       }
     },
