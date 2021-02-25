@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <Header />
+        <Header class="fijar-header"/>
         <div>
         <h1 v-if="this.$route.params.user == 'facilitador'">Facilitador</h1>
         <h1 v-else>Persona</h1>
@@ -45,6 +45,15 @@ export default {
 </script>
 
 <style>
+body{
+  margin: 0%;
+}
+
+.fijar-header{
+  position: sticky;
+  top: 0;
+}
+
 .crear{
     float: right;
     width: 150px;
