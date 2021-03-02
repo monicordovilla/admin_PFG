@@ -2,7 +2,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import user from './user'
+import session from './session'
+import users from './users'
 import {auth} from '../firebase'
 Vue.use(Vuex)
 
@@ -13,17 +14,18 @@ const store = new Vuex.Store({
   },
   actions: {
     checkAuth({commit}){
-      auth.onAuthStateChanged(function (user){
-        if(user){
-          commit("user/setUser", user)
+      auth.onAuthStateChanged(function (session){
+        if(session){
+          commit("session/setUser", session)
         }else{
-          commit("user/setUser", null)
+          commit("session/setUser", null)
         }
       })
     }
   },
   modules: {
-    user,
+    session,
+    users,
   }
 })
 

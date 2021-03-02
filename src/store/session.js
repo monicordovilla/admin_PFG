@@ -5,7 +5,7 @@ const state = {
     user: null,
 }
 
-const getters = { }
+const getters = {}
 
 const mutations ={
     setUser(state, user) {
@@ -30,7 +30,9 @@ const actions = {
 
     async doLogin({ commit }, { email, password }){
         await auth.signInWithEmailAndPassword(email,password);
+        //si current user (id usuario) no en usuarios
         commit("setUser", auth.currentUser);
+        //si está lo echo con un logout
     },
 
     async doLogout({ commit }){

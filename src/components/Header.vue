@@ -31,7 +31,7 @@ export default {
 
     async doLogout() {
       try {
-        await this.$store.dispatch("user/doLogout");
+        await this.$store.dispatch("session/doLogout");
         this.$router.push({ name: "Login" });
         this.$toast.success("Sesion cerrada")
       } catch (error) {

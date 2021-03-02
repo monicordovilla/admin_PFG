@@ -39,7 +39,7 @@ export default {
 
     async doLogin() {
       try {
-        await this.$store.dispatch("user/doLogin", {
+        await this.$store.dispatch("session/doLogin", {
           email: this.userData.email,
           password: this.userData.password
         });
