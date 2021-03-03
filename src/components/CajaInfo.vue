@@ -1,6 +1,6 @@
 <template>
   <div class="bloque">
-    Nombre    Teléfono
+    {{user.Nombre}}    {{user.Apellidos}}
     <br>
     <button class="boton" id="borrar"></button>
 
@@ -8,7 +8,7 @@
 
     <button v-if="this.$route.params.user == 'facilitador'" @click="goVincular()" class="boton" id="vincular"></button>
     <br>
-    Apellidos
+    Apodo: {{user.Apodo}}
   </div>
 </template>
 
@@ -18,12 +18,17 @@ export default {
   name: 'CajaInfo',
  
   props: {
+    user:{
+      type: Object,
+      required: true
+    }
   },
   data: function(){
       return{
         facilitador: Boolean,
       }
   },
+
   methods:{
     goVincular() {
       this.$router.push("/vincular");

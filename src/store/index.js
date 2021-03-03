@@ -17,10 +17,11 @@ const store = new Vuex.Store({
       auth.onAuthStateChanged(function (session){
         if(session){
           commit("session/setUser", session);
-          dispatch("users/getUsers")
+          dispatch("users/getUsers");
         }else{
-          commit("session/setUser", null)
-          commit("users/setUsers", [])
+          commit("session/setUser", null);
+          commit("users/setFacilitador", []);
+          commit("users/setPersona", []);
         }
       })
     }

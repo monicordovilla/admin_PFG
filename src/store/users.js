@@ -1,19 +1,24 @@
 import { db } from '../firebase.js'
 
 const state = {
-    users: [],
+    facilitadores: [],
+    personas: []
 }
 
 const getters = {
     //Buscamos al usuario en el estado local
     /*getUser: state => id => {
-        return state.users.find(room => room.id === id);
+        return state.users.find(user => user.id === id);
     },*/
 }
 
 const mutations ={
-    setUsers(state, users){
-        state.users = users
+    setFacilitador(state, facilitadores){
+        state.facilitadores = facilitadores
+    },
+
+    setPersona(state, personas){
+        state.personas = personas
     }
 }
 
@@ -30,14 +35,18 @@ const actions = {
         const query = db.collection("users").orderBy("Nombre", "desc");
         query.onSnapshot(
             querySnapshot => {
-                const users = [];
+                const facilitadores = [];
+                const personas = [];
                 querySnapshot.forEach(doc => {
                     let user = doc.data();
                     user.id = doc.id;
-                    console.log(doc.data())
-                    users.push(user);
+                    console.log(user);
+                    console.log(user.Rol);
+                    if(user.Rol == "Facilitador") facilitadores.push(user);
+                    if(user.Rol == "Persona") personas.push(user);
                 });
-                commit("setUsers", users);
+                commit("setFacilitador", facilitadores);
+                commit("setPersona", personas);
             },
           error => this.$toast.error(error.message)
         );

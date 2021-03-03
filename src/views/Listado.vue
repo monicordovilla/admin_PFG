@@ -3,8 +3,11 @@
         <Header class="fijar-header"/>
 
         <div class="listado">
+          <!-- Titulo -->
           <h1 v-if="this.$route.params.user == 'facilitador'">Facilitador</h1>
           <h1 v-else>Persona</h1>
+
+          <!-- Boton para crear -->
           <button @click="goCreacion(false)" v-if="this.$route.params.user == 'facilitador'" class="crear" >
               Crear facilitador
           </button>
@@ -15,7 +18,14 @@
           <!--v-model="buscar"-->
           <input type="search" class="form-control" placeholder="Nombre, apellidos"/>
         </div>
-        <CajaInfo v-for="(numero, index) in numeros" :key="index" /> 
+
+        <!-- Caja de información -->
+        <template v-if="this.$route.params.user == 'facilitador'">
+          <CajaInfo v-for="(facilitador, index) in facilitadores" :key="index" :user="facilitador"/>
+        </template>
+        <template v-else>
+          <CajaInfo v-for="(persona, index) in personas" :key="index" :user="persona"/>
+        </template>
     </div>
 </template>
 
@@ -47,7 +57,8 @@ export default {
   },
 
   computed:{
-    ...mapState("users", ["users"])
+    ...mapState("users", ["facilitadores"]),
+    ...mapState("users", ["personas"])
   }
 }
 </script>
