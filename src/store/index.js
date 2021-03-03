@@ -13,12 +13,14 @@ const store = new Vuex.Store({
   mutations: {
   },
   actions: {
-    checkAuth({commit}){
+    checkAuth({dispatch, commit}){
       auth.onAuthStateChanged(function (session){
         if(session){
-          commit("session/setUser", session)
+          commit("session/setUser", session);
+          dispatch("users/getUsers")
         }else{
           commit("session/setUser", null)
+          commit("users/setUsers", [])
         }
       })
     }

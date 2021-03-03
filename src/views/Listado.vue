@@ -23,7 +23,7 @@
 // @ is an alias to /src
 import Header from '@/components/Header.vue'
 import CajaInfo from '@/components/CajaInfo.vue'
-import { db } from '../firebase'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Listado',
@@ -31,41 +31,23 @@ export default {
     Header,
     CajaInfo
   },
+
   data: function(){
       return{
         number: 5,
         numeros: [1,2,3,4,5,6]
       }
   },
-
-  async created(){
-    const query = await db.collection("users").get();
-    
-    console.log('db');
-    console.log(db);
-    console.log('query');
-    console.log(query);
-  },
-
+  
   methods:{
     goCreacion(bool) {
       if (bool) this.$router.push("/crear/persona");
       else this.$router.push("/crear/facilitador");
-    },
-
-    async getUsuarios(bool){
-      const collectionRef = db.collection("users");
-      let query;
-      if (bool){ query = await collectionRef
-      .where("Rol" == "Persona")
-      .orderBy("Nombre", "asc")
-      .get();
-      }
-      else query = await collectionRef.where("Rol" == "Facilitador").get();
-      query.forEach(querySnapchot => {
-        console.log(querySnapchot.data.id());
-      });
     }
+  },
+
+  computed:{
+    ...mapState("users", ["users"])
   }
 }
 </script>
