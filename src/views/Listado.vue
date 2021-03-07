@@ -8,10 +8,10 @@
           <h1 v-else>Persona</h1>
 
           <!-- Boton para crear -->
-          <button @click="goCreacion(false)" v-if="this.$route.params.user == 'facilitador'" class="crear" >
+          <button @click="goCreacion(false)" v-if="this.$route.params.user == 'facilitador'" class="btn-crear" >
               Crear facilitador
           </button>
-          <button @click="goCreacion(true)" v-else class="crear" >
+          <button @click="goCreacion(true)" v-else class="btn-crear" >
               Crear persona
           </button>
           
@@ -77,13 +77,13 @@ body{
   margin: 0 5%;
 }
 
-.crear{
-    float: right;
-    width: 150px;
-    height: 50px;
-    font-size: large;
-    background-color: #619A8A;
-    color: white;
+.btn-crear{
+  float: right;
+  width: 150px;
+  height: 50px;
+  font-size: large;
+  background-color: #619A8A;
+  color: white;
 }
 
 .form-control{

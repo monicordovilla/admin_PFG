@@ -6,10 +6,6 @@ const state = {
 }
 
 const getters = {
-    //Buscamos al usuario en el estado local
-    /*getUser: state => id => {
-        return state.users.find(user => user.id === id);
-    },*/
 }
 
 const mutations ={
@@ -40,8 +36,6 @@ const actions = {
                 querySnapshot.forEach(doc => {
                     let user = doc.data();
                     user.id = doc.id;
-                    console.log(user);
-                    console.log(user.Rol);
                     if(user.Rol == "Facilitador") facilitadores.push(user);
                     if(user.Rol == "Persona") personas.push(user);
                 });
