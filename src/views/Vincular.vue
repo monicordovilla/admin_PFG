@@ -1,16 +1,16 @@
 <template>
     <div class="home">
-        <Header />
-        <h1>Personas vinculadas a: Nombre persona</h1>
+        <Header class="fijar-header" />
+        <h1>Personas vinculadas a: {{user.Nombre}}</h1>
         <div id="contenedor" class="clearfix">
 
         <div class="lateral">
             <h2>Vincular personas</h2>
-            <CajaVinculo v-for="(numero, index) in numeros" :key="index" />
+            <CajaVinculo v-for="(persona, index) in personas" :key="index" :user="persona" />
         </div>
 
         <div class="principal">
-            <CajaDesvincular v-for="(numero, index) in numeros" :key="index" />
+            <CajaDesvincular v-for="(persona, index) in personas" :key="index" :user="persona"/>
         </div>
 
         </div>
@@ -22,6 +22,7 @@
 import Header from '@/components/Header.vue'
 import CajaVinculo from '@/components/CajaVinculo.vue'
 import CajaDesvincular from '@/components/CajaDesvincular.vue'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Vincular',
@@ -30,15 +31,40 @@ export default {
     CajaVinculo,
     CajaDesvincular
   },
+
   data: function(){
-      return{
-        numeros: [1,2,3,4,5,6]
+    return{
+      numeros: [1,2,3,4,5,6],
+      user:{
+        type: Object,
+        required: true
       }
+    }
+  },
+
+  async created() {
+    try {
+      let id = this.$route.params.id;
+      this.user = await this.$store.dispatch("users/getFacilitador", id);
+    } catch (error) {
+      console.error(error.message);
+      this.$toast.error(error.message);
+      this.$router.push("/listado/facilitador");
+    }
+  },
+
+  computed:{
+    ...mapState("users", ["personas"])
   }
 }
 </script>
 
 <style>
+.fijar-header{
+  position: sticky;
+  top: 0;
+}
+
 #contenedor {
  text-align: left;
  width: 100%;

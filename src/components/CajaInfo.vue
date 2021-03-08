@@ -31,7 +31,7 @@ export default {
 
   methods:{
     goVincular() {
-      this.$router.push("/vincular");
+      this.$router.push({name: 'Vincular', params:{id: this.user.id}});
     }
   }
 }

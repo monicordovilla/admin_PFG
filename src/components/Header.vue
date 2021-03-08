@@ -42,7 +42,7 @@ export default {
   },
 
   computed: {
-    ...mapState("user", ["user"])
+    ...mapState("session", ["user"])
   }
 }
 </script>

@@ -18,35 +18,26 @@
 
                 <h5 class="text as-center">Contraseña</h5>
                 <div class="grid jc-center">
-                    <button @click="setCamara">
-                        <img class="pic" alt="camara" src="../assets/Password/camera.png">
-                    </button>
-                    <button @click="setCassete">
-                        <img class="pic" alt="casete" src="../assets/Password/casette-4398267_1280.png">
-                    </button>
-                    <button @click="setCat">
-                        <img class="pic" alt="gato" src="../assets/Password/cat.png">
-                    </button>
+                    <button id="btn-camara" @click="setCamara" class="btn-pic botonCamara" 
+                    :class="{ 'box-shadow' : camaraSelected }"/>
+                    <button id="btn-cassete" @click="setCassete" class="btn-pic botonCassete" 
+                    :class="{ 'box-shadow' : casetteSelected }" />
+                    <button id="btn-cat" @click="setCat" class="btn-pic botonCat" 
+                    :class="{ 'box-shadow' : catSelected }" />
 
-                    <button @click="setWoman">
-                        <img class="pic" alt="telefono" src="../assets/Password/woman-5716875_1920.png">
-                    </button>
-                    <button @click="setPhone">
-                        <img class="pic" alt="abuela" src="../assets/Password/phone-4986359_1920.jpg">
-                    </button>
-                    <button @click="setPumpkin">
-                        <img class="pic" alt="calabaza" src="../assets/Password/pumpkin-5711688_1920.jpg">
-                     </button>
+                    <button id="btn-woman" @click="setWoman" class="btn-pic botonWoman" 
+                    :class="{ 'box-shadow' : womanSelected }" />
+                    <button id="btn-phone" @click="setPhone" class="btn-pic botonPhone" 
+                    :class="{ 'box-shadow' : phoneSelected }" />
+                    <button id="btn-pumpkin" @click="setPumpkin" class="btn-pic botonPumpkin" 
+                    :class="{ 'box-shadow' : pumpkinSelected }" />
 
-                    <button @click="setSanta">
-                        <img class="pic" alt="navidad" src="../assets/Password/santa-claus-5812443_1920.jpg">
-                    </button>
-                    <button @click="setWitch">
-                        <img class="pic" alt="bruja" src="../assets/Password/witch-155291_1280.png">
-                    </button>
-                    <button @click="setFlower">
-                        <img class="pic" alt="flores" src="../assets/Password/flor.png">
-                    </button>
+                    <button id="btn-santa" @click="setSanta" class="btn-pic botonSanta" 
+                    :class="{ 'box-shadow' : santaSelected }" />
+                    <button  id="btn-witch" @click="setWitch" class="btn-pic botonWitch" 
+                    :class="{ 'box-shadow' : witchSelected }" />
+                    <button  id="btn-flower" @click="setFlower" class="btn-pic botonFlower" 
+                    :class="{ 'box-shadow' : flowerSelected }" />
                 </div>
                 <button class="add as-center" @click="doRegister">Crear</button>
             </div>
@@ -60,7 +51,7 @@ import Header from '@/components/Header.vue'
 import { db, auth } from '../firebase.js'
 
 export default {
-    name: 'Listado',
+    name: 'Creacion',
     components: {
         Header
     },
@@ -74,17 +65,16 @@ export default {
                 password: ""
             },
 
-            /*const set = new Set();
             
-            camaraSelected: Boolean,
-            casetteSelected: Boolean,
-            catSelected: Boolean,
-            womanSelected: Boolean,
-            phoneSelected: Boolean,
-            pumpkinSelected: Boolean,
-            santaSelected: Boolean,
-            witchSelected: Boolean,
-            flowerSelected: Boolean,*/
+            camaraSelected: false,
+            casetteSelected: false,
+            catSelected: false,
+            womanSelected: false,
+            phoneSelected: false,
+            pumpkinSelected: false,
+            santaSelected: false,
+            witchSelected: false,
+            flowerSelected: false,
         }
     },
   
@@ -97,6 +87,7 @@ export default {
             }else{
                 roll="Persona"
             }
+            if(this.userData.apodo == ""){this.userData.apodo = this.userData.nombre="";}
 
             await auth.createUserWithEmailAndPassword(this.userData.email, this.userData.password);
             const user = {
@@ -121,49 +112,58 @@ export default {
         },//Fin doRegister
 
         setCamara(){
-            this.userData.password += 'c4M';
-            this.camaraSelected = true;
-            console.log(this.userData.password);
+            if(!this.camaraSelected){
+                this.userData.password += 'c4M';
+                this.camaraSelected = true;
+            }
         },
         setCassete(){
-            this.userData.password += 'c3s';
-            this.casetteSelected = true;
-            console.log(this.userData.password);
+            if(!this.casetteSelected){
+                this.userData.password += 'c3s';
+                this.casetteSelected = true;
+            }
         },
         setCat(){
-            this.userData.password += 'Ca7';
-            this.catSelected = true;
-            console.log(this.userData.password);
+            if(!this.catSelected){
+                this.userData.password += 'Ca7';
+                this.catSelected = true;
+            }
         },
         setWoman(){
-            this.userData.password += 'wMn';
-            this.womanSelected = true;
-            console.log(this.userData.password);
+            if(!this.womanSelected){
+                this.userData.password += 'wMn';
+                this.womanSelected = true;
+            }
         },
         setPhone(){
-            this.userData.password += '7fn';
-            this.phoneSelected = true;
-            console.log(this.userData.password);
+            if(!this.phoneSelected){
+                this.userData.password += '7fn';
+                this.phoneSelected = true;
+            }
         },
         setPumpkin(){
-            this.userData.password += '9kN';
-            this.pumpkinSelected = true;
-            console.log(this.userData.password);
+            if(!this.pumpkinSelected){
+                this.userData.password += '9kN';
+                this.pumpkinSelected = true;
+            }
         },
         setSanta(){
-            this.userData.password += '5at';
-            this.santaSelected = true;
-            console.log(this.userData.password);
+            if(!this.santaSelected){
+                this.userData.password += '5at';
+                this.santaSelected = true;
+            }
         },
         setWitch(){
-            this.userData.password += 'w2H';
-            this.witchSelected = true;
-            console.log(this.userData.password);
+            if(!this.witchSelected){
+                this.userData.password += 'w2H';
+                this.witchSelected = true;
+            }
         },
         setFlower(){
-            this.userData.password += '8Er';
-            this.flowerSelected = true;
-            console.log(this.userData.password);
+            if(!this.flowerSelected){
+                this.userData.password += '8Er';
+                this.flowerSelected = true;
+            }
         }
     },
 }
@@ -175,9 +175,8 @@ export default {
   top: 0;
 }
 
-.box-shadow{
-    border-width: 0.3rem;
-}
+.box-shadow{ box-shadow: 0px 0px 8px 7px rgba(0,0,0,0.81); }
+.box-no-border{ border: none }
 
 .form-crear{
     display: flex;
@@ -207,16 +206,35 @@ export default {
   margin-bottom: 1rem;
 }
 
-.pic {
-	margin: auto; /*Necesario para que Flex funcione*/
-	width: 6rem;
-    height: 6rem;
-}
-
 .grid{
     display: grid;
     gap: .5rem;
     grid-template-columns: 7rem 7rem 7rem;
     grid-template-rows:  7rem 7rem 7rem;
 }
+
+/*Botones*/
+.btn-pic {
+	width: 6rem;
+    height: 6rem;
+    border: none;
+}
+
+.botonCamara, .botonCassete, .botonCat,
+.botonWoman, .botonPhone, .botonPumpkin,
+.botonSanta, .botonWitch, .botonFlower{
+    background-repeat:no-repeat;
+    background-position:center;
+    background-size: 6rem;
+}
+
+.botonCamara{ background-image: url(../assets/Password/camera.png);}
+.botonCassete{ background-image: url(../assets/Password/casette-4398267_1280.png); }
+.botonCat{ background-image: url(../assets/Password/cat.png); }
+.botonWoman{ background-image: url(../assets/Password/woman-5716875_1920.png); }
+.botonPhone{ background-image: url(../assets/Password/phone-4986359_1920.jpg); }
+.botonPumpkin{ background-image: url(../assets/Password/pumpkin-5711688_1920.jpg); }
+.botonSanta{ background-image: url(../assets/Password/santa-claus-5812443_1920.jpg); }
+.botonWitch{ background-image: url(../assets/Password/witch-155291_1280.png); }
+.botonFlower{ background-image: url(../assets/Password/flor.png); }
 </style>

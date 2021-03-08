@@ -39,7 +39,7 @@ const routes = [
     }
   },
   {
-    path: '/vincular',
+    path: '/vincular/:id',
     name: 'Vincular',
     component: () => import('../views/Vincular.vue'),
     meta: {

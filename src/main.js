@@ -7,10 +7,6 @@ import VueToast from 'vue-toast-notification';
 //import 'vue-toast-notification/dist/theme-default.css';
 import 'vue-toast-notification/dist/theme-sugar.css';
 
-
-/*import { db } from './firebase'
-console.log(db);*/
-
 Vue.use(VueToast, {
   position: "bottom"
 });
