@@ -38,7 +38,6 @@ const actions = {
             if (!user.exists) throw new Error("No se ha encontrado al facilitador");
             user = user.data();
         }
-    
         return user;
     },
 
@@ -54,8 +53,7 @@ const actions = {
     
             if (!user.exists) throw new Error("No se ha encontrado a la persona");
             user = user.data();
-        }
-    
+        }    
         return user;
     },
 
@@ -77,6 +75,33 @@ const actions = {
             },
           error => this.$toast.error(error.message)
         );
+    },
+
+    async Vincular({dispatch} , { userID, persona }) {
+        try {
+            const user = await dispatch("getFacilitador", userID);
+            let newPersonas =[];
+
+            if(user.Personas != null){
+                user.Personas.push(persona);
+                
+                for(var x=0; x<user.Personas.length; x++){
+                    newPersonas.push(user.Personas[x]);
+                }
+            }else{
+                newPersonas.push(persona);
+            }
+            console.log(newPersonas);
+
+            await db
+                .collection("users")
+                .doc(userID)
+                .update({
+                    "Personas" : newPersonas
+                });
+        } catch (error) {
+            console.error(error.message);
+        }    
     },
 }
 

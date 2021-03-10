@@ -6,11 +6,14 @@
 
         <div class="lateral">
             <h2>Vincular personas</h2>
-            <CajaVinculo v-for="(persona, index) in personas" :key="index" :user="persona" />
+            <CajaVinculo v-for="(persona, index) in noVinculados" :key="index" :id="persona" />
         </div>
 
-        <div class="principal">
-            <CajaDesvincular v-for="(persona, index) in personas" :key="index" :user="persona"/>
+        <div v-if="user.Personas != null" class="principal">
+            <CajaDesvincular v-for="(persona, index) in user.Personas" :key="index" :id="persona"/>
+        </div>
+        <div v-else class="principal">
+            <h2>No hay usuarios vinculados</h2>
         </div>
 
         </div>
@@ -38,7 +41,8 @@ export default {
       user:{
         type: Object,
         required: true
-      }
+      },
+      noVinculados: []
     }
   },
 
@@ -50,6 +54,20 @@ export default {
       console.error(error.message);
       this.$toast.error(error.message);
       this.$router.push("/listado/facilitador");
+    }
+
+    var x=0;
+    if (this.user.Personas != null){
+      for(x; x<this.personas.length; x++){
+        if(!this.user.Personas.includes(this.personas[x].id)){
+          this.noVinculados.push(this.personas[x].id);
+        }
+      }
+    }
+    else{
+      for(x; x<this.personas.length; x++){
+        this.noVinculados.push(this.personas[x].id);
+      }
     }
   },
 

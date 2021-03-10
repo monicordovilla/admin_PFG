@@ -80,35 +80,44 @@ export default {
   
     methods:{
         async doRegister() {
-        try {
-            var roll;
-            if(this.$route.params.user == 'facilitador'){
-                roll= "Facilitador"
-            }else{
-                roll="Persona"
+            try {
+                var roll;
+                if(this.$route.params.user == 'facilitador'){
+                    roll= "Facilitador"
+                }else{
+                    roll="Persona"
+                }
+                if(this.userData.apodo == ""){this.userData.apodo = this.userData.nombre="";}
+
+                await auth.createUserWithEmailAndPassword(this.userData.email, this.userData.password);
+                const user = {
+                    Nombre: this.userData.nombre,
+                    Apellidos: this.userData.apellidos,
+                    Apodo: this.userData.apodo,
+                    Rol: roll
+                };
+                await db.collection("users").doc(auth.getCurrentUser).set(user)
+                this.$toast.success("Usuario registrado")
+                this.userData.nombre=""
+                this.userData.apellidos=""
+                this.userData.apodo=""
+                this.userData.email=""
+                this.userData.password=""
+                this.camaraSelected = false
+                this.casetteSelected = false
+                this.catSelected = false
+                this.womanSelected = false
+                this.phoneSelected = false
+                this.pumpkinSelected = false
+                this.santaSelected = false
+                this.witchSelected = false
+                this.flowerSelected = false
+
+            } catch (error) {
+                this.$toast.error("No se ha podido registrar este usuario")
+                console.log("No se ha podido realizar el registro")
+                console.error(error.message);
             }
-            if(this.userData.apodo == ""){this.userData.apodo = this.userData.nombre="";}
-
-            await auth.createUserWithEmailAndPassword(this.userData.email, this.userData.password);
-            const user = {
-                Nombre: this.userData.nombre,
-                Apellidos: this.userData.apellidos,
-                Apodo: this.userData.apodo,
-                Rol: roll
-            };
-            await db.collection("users").doc(auth.getCurrentUser).set(user);
-            this.$toast.success("Usuario registrado");
-            this.userData.nombre="";
-            this.userData.apellidos="";
-            this.userData.apodo="";
-            this.userData.email="";
-            this.userData.password="";
-
-        } catch (error) {
-            this.$toast.error("No se ha podido registrar este usuario")
-            console.log("No se ha podido realizar el registro")
-            console.error(error.message);
-        }
         },//Fin doRegister
 
         setCamara(){

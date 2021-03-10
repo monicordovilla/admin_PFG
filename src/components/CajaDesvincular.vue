@@ -1,10 +1,10 @@
 <template>
   <div class="bloque">
-    Nombre    Teléfono
+    {{user.Nombre}}    {{user.Apellidos}}
     <br>
     <button class="boton-menos"></button>
     <br>
-    Apellidos
+    Apodo: {{user.Apodo}}
   </div>
 </template>
 
@@ -14,12 +14,29 @@ export default {
   name: 'CajaDesvincular',
  
   props: {
+    id:{
+      type: String,
+      required: true
+    }
   },
   data: function(){
-      return{
-        facilitador: Boolean,
+    return{
+      user:{
+        type: Object,
+        required: true
       }
-  }
+    }
+  },
+
+  async created() {
+    try {
+      this.user = await this.$store.dispatch("users/getPersona", this.id);
+    } catch (error) {
+      console.error(error.message);
+      this.$toast.error(error.message);
+      this.$router.push("/listado/facilitador");
+    }
+  },
 }
 </script>
 

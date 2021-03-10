@@ -1,10 +1,10 @@
 <template>
   <div class="bloque">
-    Nombre    Teléfono
+    {{user.Nombre}}    {{user.Apellidos}}
     <br>
-    <button class="boton-mas"></button>
+    <button @click="Vincular" class="boton-mas"></button>
     <br>
-    Apellidos
+    Apodo: {{user.Apodo}}
   </div>
 </template>
 
@@ -14,12 +14,46 @@ export default {
   name: 'CajaVinculo',
  
   props: {
+    id:{
+      type: String,
+      required: true
+    }
   },
   data: function(){
-      return{
-        facilitador: Boolean,
+    return{
+      user:{
+        type: Object,
+        required: true
       }
-  }
+    }
+  },
+
+  async created() {
+    try {
+      this.user = await this.$store.dispatch("users/getPersona", this.id);
+    } catch (error) {
+      console.error(error.message);
+      this.$toast.error(error.message);
+      this.$router.push("/listado/facilitador");
+    }
+  },
+
+  methods: {
+    async Vincular() {
+      try {
+        await this.$store.dispatch("users/Vincular", {
+          userID: this.$route.params.id,
+          persona: this.id
+        });
+        this.$toast.success("Persona vinculada");
+      } catch (error) {
+        console.error(error.message);
+        this.$toast.error(error.message);
+      }
+
+      this.$router.go()
+    }
+  },
 }
 </script>
 
