@@ -1,10 +1,10 @@
 <template>
   <div class="bloque">
-    {{user.Nombre}}    {{user.Apellidos}}
-    <br>
+    <div class="user-info">
+      <p class="nombre">{{user.Nombre}}    {{user.Apellidos}}</p>
+      <p class="apodo">Apodo: {{user.Apodo}}</p>
+    </div>
     <button @click="Vincular" class="boton-mas"></button>
-    <br>
-    Apodo: {{user.Apodo}}
   </div>
 </template>
 
@@ -59,20 +59,38 @@ export default {
 
 <style>
 .bloque{
-    background-color: azure;
-    margin: 5%;
-    text-align: left;
+  display: flex;
+  align-items: center;
+  background-color: azure;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  text-align: left;
 }
 
 .option{
-    height: 20px;
-    width: 20px;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.user-info{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.nombre{
+  margin: 0 0 0.5rem;
+}
+
+.apodo{
+  margin: 0;
 }
 
 .boton-mas{
   float: right;
-  height: 30px;
-  width: 30px;
+  height: 2rem;
+  width: 2rem;
   background-color: #619A8A;
   color: white;
   

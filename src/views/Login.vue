@@ -59,7 +59,7 @@ export default {
 
 <style scoped>
 h3 {
-  margin: 40px 0 0;
+  margin: 2.5rem 0 0;
 }
 
 .logo{
@@ -75,8 +75,8 @@ form {
 /* Full-width inputs */
 input[type=text], input[type=password] {
   width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
+  padding: 1rem 1.3rem;
+  margin: 0.5rem 0;
   display: inline-block;
   border: 1px solid #ccc;
   box-sizing: border-box;
@@ -86,8 +86,8 @@ input[type=text], input[type=password] {
 button {
   background-color: #619A8A;
   color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
+  padding: 1rem 1.3rem;
+  margin: 0.5rem 0;
   border: none;
   cursor: pointer;
   width: 100%;
@@ -105,13 +105,13 @@ button:hover {
 
 /* Add padding to containers */
 .container {
-  padding: 16px;  
+  padding: 1rem;  
 }
 
 /* The "Forgot password" text */
 span.psw {
   float: right;
-  padding-top: 16px;
+  padding-top: 1rem;
 }
 
 /* Change styles for span and cancel button on extra small screens */

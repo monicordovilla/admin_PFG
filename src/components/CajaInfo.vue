@@ -1,14 +1,16 @@
 <template>
   <div class="bloque">
-    {{user.Nombre}}    {{user.Apellidos}}
-    <br>
-    <button class="boton" id="borrar"></button>
+    <div class="user-info">
+      <p class="nombre">{{user.Nombre}}    {{user.Apellidos}}</p>
+      <p class="apodo">Apodo: {{user.Apodo}}</p>
+    </div>
+    <div class="botones">
+    <button class="boton borrar"></button>
 
-    <button class="boton" id="modificar"></button>
+    <button class="boton modificar"></button>
 
-    <button v-if="this.$route.params.user == 'facilitador'" @click="goVincular()" class="boton" id="vincular"></button>
-    <br>
-    Apodo: {{user.Apodo}}
+    <button v-if="this.$route.params.user == 'facilitador'" @click="goVincular()" class="boton vincular"></button>
+    </div>
   </div>
 </template>
 
@@ -37,44 +39,72 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .bloque{
-    background-color: azure;
-    margin: 5%;
-    text-align: left;
+  display: flex;  
+  align-items: center;
+  background-color: azure;
+  margin: 3rem;
+  padding: 1rem;
+  text-align: left;
 }
 
 .option{
-    height: 20px;
-    width: 20px;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.user-info{
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  width: 100%;
+}
+
+.nombre{
+  margin: 0 0 0.5rem;
+}
+
+.apodo{
+  margin: 0;
+}
+
+.botones{
+  display: flex;
+  justify-content: flex-end;
+  width: 10rem;
 }
 
 .boton{
   float: right;
-  height: 30px;
-  width: 30px;
+  height: 2rem;
+  width: 2rem;
   background-color: #619A8A;
   color: white;
 }
 
-#borrar{
+.borrar{
   background-image: url(../assets/recycle-bin.png);
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: 80%;
 }
 
-#modificar{
+.modificar{
   background-image: url(../assets/pencil.png);
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: 80%;
+  
+  margin-left: 0.5rem;
 }
 
-#vincular{
+.vincular{
   background-image: url(../assets/vincular.png);
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: 80%;
+
+  margin-left: 0.5rem;
 }
 </style>

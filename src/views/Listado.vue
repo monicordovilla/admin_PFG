@@ -65,7 +65,7 @@ export default {
 
 <style>
 body{
-  margin: 0%;
+  margin: 0;
 }
 
 .fijar-header{
@@ -79,8 +79,8 @@ body{
 
 .btn-crear{
   float: right;
-  width: 150px;
-  height: 50px;
+  width: 9rem;
+  height: 3rem;
   font-size: large;
   background-color: #619A8A;
   color: white;
@@ -88,13 +88,13 @@ body{
 
 .form-control{
   background-image: url('../assets/lupa.png');
-  background-position: 6px 6px;
+  background-position: 0.5rem 0.5rem;
   background-size: 3%;
   background-repeat: no-repeat;
   width: 80%;
-  font-size: 16px;
-  padding: 12px 20px 12px 40px;
+  font-size: 1rem;
+  padding: 1rem 1.3rem 1rem 2.5rem;
   border: 1px solid #ddd;
-  margin-bottom: 12px;
+  margin-bottom: 1rem;
 }
 </style>

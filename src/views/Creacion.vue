@@ -184,7 +184,7 @@ export default {
   top: 0;
 }
 
-.box-shadow{ box-shadow: 0px 0px 8px 7px rgba(0,0,0,0.81); }
+.box-shadow{ box-shadow: 0 0 0.5rem 0.5rem rgba(0,0,0,0.81); }
 .box-no-border{ border: none }
 
 .form-crear{
@@ -209,7 +209,7 @@ export default {
 
 .form{
   width: 100%;
-  font-size: 16px;
+  font-size: 1rem;
   padding: 1rem .5rem;
   border: 1px solid #ddd;
   margin-bottom: 1rem;

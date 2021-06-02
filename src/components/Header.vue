@@ -51,7 +51,6 @@ export default {
 <style scoped>
 
 .header{
-  margin: 0;
   text-align: center;
   color: blanchedalmond;
   background-color: #619A8A;
@@ -61,10 +60,10 @@ button{
   background-color: white;
   color: teal;
   display: inline;
-  height: 50px;
-  width: 150px;
+  height: 3rem;
+  width: 9rem;
   font-size: medium;
-  margin: 10px;
+  margin: 1rem;
 }
 
 .botones{

@@ -47,15 +47,15 @@ export default {
 
 h1{
   display: block;
-  font-size: 50px;
+  font-size: 3rem;
 }
 
 .boton-ini{
   display: block;
-  margin-top: 25px;
-  margin-left: 100px;
-  height: 70px;
-  width: 200px;
+  margin-top: 1.5rem;
+  margin-left: 6rem;
+  height: 4.5rem;
+  width: 12.5rem;
   font-size: large;
   background-color: #619A8A;
   color: white;
@@ -64,10 +64,10 @@ h1{
 .mencion{
   position:absolute;
   width:100%;
-  bottom: 1px;
+  bottom: 0.1rem;
 }
 
 button{
-  border-radius: .5rem;
+  border-radius: 0.5rem;
 }
 </style>
