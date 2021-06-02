@@ -25,8 +25,14 @@ export default {
 
   methods: {
     goPersona(bool) {
-      if (bool) this.$router.push("/listado/persona");
-      else this.$router.push("/listado/facilitador");
+      if (bool){
+        if (this.$route.path != "/listado/persona")
+          this.$router.push("/listado/persona");
+      }
+      else {
+        if (this.$route.path != "/listado/facilitador")
+          this.$router.push("/listado/facilitador");
+      }
     },
 
     async doLogout() {
