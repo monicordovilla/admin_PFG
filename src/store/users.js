@@ -103,6 +103,28 @@ const actions = {
             console.error(error.message);
         }    
     },
+
+    async Desvincular({dispatch} , { userID, persona }) {
+        try {
+            const user = await dispatch("getFacilitador", userID);
+            let newPersonas = [];
+
+            if(user.Personas.length >= 1){
+                let index = user.Personas.indexOf(persona);                
+                newPersonas = user.Personas.splice(index, 1);
+            }
+            console.log(newPersonas)
+
+            await db
+                .collection("users")
+                .doc(userID)
+                .update({
+                    "Personas" : newPersonas
+                });
+        } catch (error) {
+            console.error(error.message);
+        }    
+    },
 }
 
 export default {

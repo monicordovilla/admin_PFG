@@ -4,7 +4,7 @@
       <p class="nombre">{{user.Nombre}}    {{user.Apellidos}}</p>
       <p class="apodo">Apodo: {{user.Apodo}}</p>
     </div>
-    <button class="boton-menos"></button>
+    <button @click="Desvincular" class="boton-menos"></button>
   </div>
 </template>
 
@@ -35,6 +35,23 @@ export default {
       console.error(error.message);
       this.$toast.error(error.message);
       this.$router.push("/listado/facilitador");
+    }
+  },
+
+  methods: {
+    async Desvincular() {
+      try {
+        await this.$store.dispatch("users/Desvincular", {
+          userID: this.$route.params.id,
+          persona: this.id
+        });
+        this.$toast.success("Persona desvinculada");
+      } catch (error) {
+        console.error(error.message);
+        this.$toast.error(error.message);
+      }
+
+      this.$router.go()
     }
   },
 }
