@@ -16,15 +16,29 @@
           </button>
           
           <!--v-model="buscar"-->
-          <input type="search" class="form-control" placeholder="Nombre, apellidos"/>
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Nombre, apellidos"
+            v-model="searchText"            
+            @keyup="buscarUsuario()"
+          />
         </div>
 
         <!-- Caja de información -->
         <template v-if="this.$route.params.user == 'facilitador'">
-          <CajaInfo v-for="(facilitador, index) in facilitadores" :key="index" :user="facilitador"/>
+          <CajaInfo 
+            v-for="(facilitador, index) in listFacilitadores" 
+            :key="index" 
+            :user="facilitador" 
+          />
         </template>
         <template v-else>
-          <CajaInfo v-for="(persona, index) in personas" :key="index" :user="persona"/>
+          <CajaInfo
+            v-for="(persona, index) in listPersonas" 
+            :key="index"
+            :user="persona"
+          />
         </template>
     </div>
 </template>
@@ -45,7 +59,10 @@ export default {
   data: function(){
       return{
         number: 5,
-        numeros: [1,2,3,4,5,6]
+        numeros: [1,2,3,4,5,6],
+        searchText: "",
+        listFacilitadores: [],
+        listPersonas: [],
       }
   },
   
@@ -53,13 +70,55 @@ export default {
     goCreacion(bool) {
       if (bool) this.$router.push("/crear/persona");
       else this.$router.push("/crear/facilitador");
-    }
+    },
+
+    buscarUsuario() {
+      if(this.searchText == ""){
+        this.listFacilitadores = this.facilitadores
+        this.listPersonas = this.personas
+      } else {
+        if (this.$route.params.user == 'facilitador'){
+          this.listFacilitadores = []
+
+          this.facilitadores.forEach(user => {
+            if (user.Nombre.toLowerCase().includes(this.searchText.toLowerCase())) {
+              this.listFacilitadores.push(user)
+            } else if (user.Apellidos.toLowerCase().includes(this.searchText.toLowerCase())){
+              this.listFacilitadores.push(user)
+            } else if (user.Apodo.toLowerCase().includes(this.searchText.toLowerCase())){
+              this.listFacilitadores.push(user)
+            }
+          })
+        } else {
+          this.listPersonas = []
+
+          this.personas.forEach(user => {
+            if (user.Nombre.toLowerCase().includes(this.searchText.toLowerCase())) {
+              this.listPersonas.push(user)
+            } else if (user.Apellidos.toLowerCase().includes(this.searchText.toLowerCase())){
+              this.listPersonas.push(user)
+            } else if (user.Apodo.toLowerCase().includes(this.searchText.toLowerCase())){
+              this.listPersonas.push(user)
+            }
+          })
+        }
+      }
+    },
   },
 
   computed:{
     ...mapState("users", ["facilitadores"]),
-    ...mapState("users", ["personas"])
-  }
+    ...mapState("users", ["personas"]),
+  },
+
+  watch: {
+    facilitadores: function () {
+      this.listFacilitadores = this.facilitadores
+    },
+    personas: function () {
+      this.listPersonas = this.personas
+    },
+  },
 }
 </script>
 
