@@ -60,7 +60,8 @@
                         > </div>
                     </div>
                 </div>
-                <button class="add as-center" @click="doRegister">Crear</button>
+                <button v-if="this.$route.name == 'Creacion'" class="add as-center" @click="doRegister">Crear</button>
+                <button v-else class="add as-center" @click="doModify">Crear</button>
             </div>
         </div>
     </div>
@@ -98,6 +99,16 @@ export default {
             witchSelected: false,
             flowerSelected: false,
         }
+    },
+
+    async mounted(){
+        let user = await this.$store.dispatch("users/getFacilitador", this.$route.params.user);
+
+        this.userData.nombre = user.Nombre
+        this.userData.apellidos = user.Apellidos
+        this.userData.apodo = user.Apodo
+        this.userData.imageURL = user.Imagen
+        this.userData.image = user.Imagen
     },
   
     methods:{
@@ -174,6 +185,54 @@ export default {
                 console.error(error.message);
             }
         },//Fin doRegister
+
+        async doModify() {
+            //Comprobar campos llenos
+            if (this.userData.email == ""){
+                this.$toast.error("Email vacío")
+                return
+            } else if(this.userData.password == ""){
+                this.$toast.error("Introduzca contraseña")
+                return
+            } else if(this.userData.nombre == ""){
+                this.$toast.error("Introduzca nombre")
+                return
+            } else if(this.userData.apellidos == ""){
+                this.$toast.error("Introduzca un apellido")
+                return
+            } else if(!this.image){
+                this.$toast.error("Introduzca una imagen identificativa")
+                return
+            }
+
+            //Registrar
+            try {
+                //Si no tiene apodo, el apodo será el nombre
+                if(this.userData.apodo == ""){this.userData.apodo = this.userData.nombre;}
+
+                //Actualizar email
+
+                //Subir imagen
+                this.imageURL = await this.$store.dispatch("users/uploadUserImage", {
+                    file: this.image,
+                    userID: this.$route.params.user,
+                });
+
+                //Crear documento con la información del usuario
+                const user = {
+                    Nombre: this.userData.nombre,
+                    Apellidos: this.userData.apellidos,
+                    Apodo: this.userData.apodo,
+                    Imagen: this.imageURL,
+                };
+                await db.collection("users").doc(this.$route.params.user).update(user)
+                this.$toast.success("Usuario modificado")
+            } catch (error) {
+                this.$toast.error("No se ha podido modificar este usuario")
+                console.log("No se ha podido modificar a este usuario")
+                console.error(error.message);
+            }
+        },//Fin doModify
 
         onFileChange(event) {
             this.image = event.target.files[0];

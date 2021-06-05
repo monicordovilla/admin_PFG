@@ -39,6 +39,14 @@ const routes = [
     }
   },
   {
+    path: '/modificar/:user',
+    name: 'Modificar',
+    component: () => import('../views/Creacion.vue'),
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/vincular/:id',
     name: 'Vincular',
     component: () => import('../views/Vincular.vue'),

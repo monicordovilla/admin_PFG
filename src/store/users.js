@@ -79,6 +79,26 @@ const actions = {
         return user;
     },
 
+    async getUser({ getters }, userID) {
+        // Buscamos en local si tenemos guardado la persona
+        let user = getters["getPersona"](userID);
+
+        //Buscamos si tenemos guardado el facilitador
+        if (!user) {user = getters["getFacilitador"](userID);}
+
+        //Si no tenemos a la persona la sacamos de Cloud Firestore
+        if (!user) {
+            user = await db
+            .collection("users")
+            .doc(userID)
+            .get();
+    
+            if (!user.exists) throw new Error("No se ha encontrado a la persona");
+            user = user.data();
+        }    
+        return user;
+    },
+
     //Buscamos usuarios en Cloud Firestore
     async getUsers({ commit }) {
         const query = db.collection("users").orderBy("Nombre", "desc");
