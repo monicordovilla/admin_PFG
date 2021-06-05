@@ -16,28 +16,49 @@
                 <input v-model="userData.email" type="text" class="form" placeholder="Email"/>
                 </form>
 
-                <h5 class="text as-center">Contraseña</h5>
-                <div class="grid jc-center">
-                    <button id="btn-camara" @click="setCamara" class="btn-pic botonCamara" 
-                    :class="{ 'box-shadow' : camaraSelected }"/>
-                    <button id="btn-cassete" @click="setCassete" class="btn-pic botonCassete" 
-                    :class="{ 'box-shadow' : casetteSelected }" />
-                    <button id="btn-cat" @click="setCat" class="btn-pic botonCat" 
-                    :class="{ 'box-shadow' : catSelected }" />
+                <div class="pass-img">
+                    <div>
+                        <h5 class="text as-center">Contraseña</h5>
+                        <div class="grid jc-center">
+                            <button id="btn-camara" @click="setCamara" class="btn-pic botonCamara" 
+                            :class="{ 'box-shadow' : camaraSelected }"/>
+                            <button id="btn-cassete" @click="setCassete" class="btn-pic botonCassete" 
+                            :class="{ 'box-shadow' : casetteSelected }" />
+                            <button id="btn-cat" @click="setCat" class="btn-pic botonCat" 
+                            :class="{ 'box-shadow' : catSelected }" />
 
-                    <button id="btn-woman" @click="setWoman" class="btn-pic botonWoman" 
-                    :class="{ 'box-shadow' : womanSelected }" />
-                    <button id="btn-phone" @click="setPhone" class="btn-pic botonPhone" 
-                    :class="{ 'box-shadow' : phoneSelected }" />
-                    <button id="btn-pumpkin" @click="setPumpkin" class="btn-pic botonPumpkin" 
-                    :class="{ 'box-shadow' : pumpkinSelected }" />
+                            <button id="btn-woman" @click="setWoman" class="btn-pic botonWoman" 
+                            :class="{ 'box-shadow' : womanSelected }" />
+                            <button id="btn-phone" @click="setPhone" class="btn-pic botonPhone" 
+                            :class="{ 'box-shadow' : phoneSelected }" />
+                            <button id="btn-pumpkin" @click="setPumpkin" class="btn-pic botonPumpkin" 
+                            :class="{ 'box-shadow' : pumpkinSelected }" />
 
-                    <button id="btn-santa" @click="setSanta" class="btn-pic botonSanta" 
-                    :class="{ 'box-shadow' : santaSelected }" />
-                    <button  id="btn-witch" @click="setWitch" class="btn-pic botonWitch" 
-                    :class="{ 'box-shadow' : witchSelected }" />
-                    <button  id="btn-flower" @click="setFlower" class="btn-pic botonFlower" 
-                    :class="{ 'box-shadow' : flowerSelected }" />
+                            <button id="btn-santa" @click="setSanta" class="btn-pic botonSanta" 
+                            :class="{ 'box-shadow' : santaSelected }" />
+                            <button  id="btn-witch" @click="setWitch" class="btn-pic botonWitch" 
+                            :class="{ 'box-shadow' : witchSelected }" />
+                            <button  id="btn-flower" @click="setFlower" class="btn-pic botonFlower" 
+                            :class="{ 'box-shadow' : flowerSelected }" />
+                        </div>
+                    </div>
+                    <div>
+                        <div class="select-image">
+                            <h5 class="text as-center mr-rm__1">Imagen</h5>
+                            <input
+                                type="file"
+                                @change="onFileChange"
+                                ref="file"
+                                class="transparent"
+                            >
+                        </div>
+                        <div
+                            class="user-img"
+                            :style="{
+                                'background-image': `url(${userImage})`
+                            }"
+                        > </div>
+                    </div>
                 </div>
                 <button class="add as-center" @click="doRegister">Crear</button>
             </div>
@@ -62,10 +83,11 @@ export default {
                 apellidos: "",
                 apodo: "",
                 email: "",
-                password: ""
+                password: "",
+                imageURL: "",
             },
 
-            
+            image: null,
             camaraSelected: false,
             casetteSelected: false,
             catSelected: false,
@@ -80,24 +102,57 @@ export default {
   
     methods:{
         async doRegister() {
+            //Comprobar campos llenos
+            if (this.userData.email == ""){
+                this.$toast.error("Email vacío")
+                return
+            } else if(this.userData.password == ""){
+                this.$toast.error("Introduzca contraseña")
+                return
+            } else if(this.userData.nombre == ""){
+                this.$toast.error("Introduzca nombre")
+                return
+            } else if(this.userData.apellidos == ""){
+                this.$toast.error("Introduzca un apellido")
+                return
+            } else if(!this.image){
+                this.$toast.error("Introduzca una imagen identificativa")
+                return
+            }
+
+            //Registrar
             try {
-                var roll;
+                let roll;
                 if(this.$route.params.user == 'facilitador'){
                     roll= "Facilitador"
                 }else{
                     roll="Persona"
                 }
-                if(this.userData.apodo == ""){this.userData.apodo = this.userData.nombre="";}
 
+                //Si no tiene apodo, el apodo será el nombre
+                if(this.userData.apodo == ""){this.userData.apodo = this.userData.nombre;}
+
+                //Crear usuario
                 await auth.createUserWithEmailAndPassword(this.userData.email, this.userData.password);
+
+                //Subir imagen
+                this.imageURL = await this.$store.dispatch("users/uploadUserImage", {
+                    file: this.image,
+                    userID: auth.getCurrentUser,
+                });
+
+                //Crear documento con la información del usuario
                 const user = {
                     Nombre: this.userData.nombre,
                     Apellidos: this.userData.apellidos,
                     Apodo: this.userData.apodo,
-                    Rol: roll
+                    Rol: roll,
+                    Imagen: this.imageURL,
                 };
                 await db.collection("users").doc(auth.getCurrentUser).set(user)
                 this.$toast.success("Usuario registrado")
+
+                //Limpiar campos
                 this.userData.nombre=""
                 this.userData.apellidos=""
                 this.userData.apodo=""
@@ -119,6 +174,11 @@ export default {
                 console.error(error.message);
             }
         },//Fin doRegister
+
+        onFileChange(event) {
+            this.image = event.target.files[0];
+            this.$refs.file.value = null;
+        },
 
         setCamara(){
             if(!this.camaraSelected){
@@ -175,6 +235,14 @@ export default {
             }
         }
     },
+
+    computed: {
+        userImage() {
+        return this.image
+            ? URL.createObjectURL(this.image)
+            : require("@/assets/user-image.png");
+        },
+    },
 }
 </script>
 
@@ -197,6 +265,27 @@ export default {
 .text{ margin: 0.5rem 0; }
 .as-center{ align-self: center; }
 .jc-center{ justify-content: center; }
+.transparent {color: transparent}
+.mr-rm__1{ margin-right: 1rem;}
+
+.select-image{
+    display: flex;
+    align-items: center;
+}
+
+.pass-img {
+    display: flex;
+    justify-content: space-around;
+}
+
+.user-img{
+  height: 18rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  border: 1px solid;
+  background-size: cover;
+  background-position: center;
+}
 
 .add{
     width: 7rem;

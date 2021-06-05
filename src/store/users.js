@@ -1,4 +1,4 @@
-import { db } from '../firebase.js'
+import { db, storage } from '../firebase.js'
 
 const state = {
     facilitadores: [],
@@ -24,7 +24,29 @@ const mutations ={
     }
 }
 
-const actions = {    
+const actions = {
+    getNewUserId(){
+        return db.collection("users").doc
+    },
+
+    async uploadUserImage(context, { userID, file }) {
+        const uploadPhoto = () => {
+            let fileName = `user/${userID}/${userID}-image.jpg`;
+            return storage.ref(fileName).put(file);
+        };
+
+        function getDownloadURL(ref) {
+            return ref.getDownloadURL();
+        }
+
+        try {
+            let upload = await uploadPhoto();
+            return await getDownloadURL(upload.ref);
+        } catch (error) {
+            throw Error(error.message);
+        }
+    },
+
     async getFacilitador({ getters }, userID) {
         // Buscamos en local si tenemos guardado el facilitador
         let user = getters["getFacilitador"](userID);
