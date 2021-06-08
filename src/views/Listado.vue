@@ -58,8 +58,6 @@ export default {
 
   data: function(){
       return{
-        number: 5,
-        numeros: [1,2,3,4,5,6],
         searchText: "",
         listFacilitadores: [],
         listPersonas: [],

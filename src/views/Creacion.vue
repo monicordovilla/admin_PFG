@@ -2,8 +2,12 @@
     <div class="home">
         <Header class="fijar-header"/>
         <div>
-            <h1 v-if="this.$route.params.user == 'facilitador'"> Crear facilitador</h1>
-            <h1 v-else>Crear persona</h1>
+            <div v-if="this.$route.name == 'Creacion'">
+                <h1 v-if="this.$route.params.user == 'facilitador'"> Crear facilitador</h1>
+                <h1 v-else>Crear persona</h1>
+            </div>
+            <h1 v-else>Modificar a {{userData.nombre}} {{userData.apellidos}}</h1>
+
             <div class="form-crear">
                 <form>
                 <h5 class="text">Nombre</h5>
@@ -12,12 +16,12 @@
                 <input v-model="userData.apellidos" type="text" class="form" placeholder="Apellidos"/>
                 <h5 class="text">Apodo</h5>
                 <input v-model="userData.apodo" type="text" class="form" placeholder="Apodo"/>
-                <h5 class="text">Email</h5>
-                <input v-model="userData.email" type="text" class="form" placeholder="Email"/>
+                <h5 v-if="this.$route.name == 'Creacion'" class="text">Email</h5>
+                <input v-if="this.$route.name == 'Creacion'" v-model="userData.email" type="text" class="form" placeholder="Email"/>
                 </form>
 
                 <div class="pass-img">
-                    <div>
+                    <div v-if="this.$route.name == 'Creacion'">
                         <h5 class="text as-center">Contraseña</h5>
                         <div class="grid jc-center">
                             <button id="btn-camara" @click="setCamara" class="btn-pic botonCamara" 
@@ -108,16 +112,18 @@ export default {
         this.userData.apellidos = user.Apellidos
         this.userData.apodo = user.Apodo
         this.userData.imageURL = user.Imagen
-        this.userData.image = user.Imagen
+        this.image = user.Imagen
 
-        auth.getUser(this.$route.params.user)
+        /*app
+            .auth()
+            .getUser(this.$route.params.user)
             .then((userRecord) => {
                 // See the UserRecord reference doc for the contents of userRecord.
                 console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
             })
             .catch((error) => {
                 console.log('Error fetching user data:', error);
-            });
+            });*/
     },
   
     methods:{
@@ -306,9 +312,15 @@ export default {
 
     computed: {
         userImage() {
-        return this.image
-            ? URL.createObjectURL(this.image)
-            : require("@/assets/user-image.png");
+            if (this.$route.name == 'Creacion'){
+                return this.image
+                ? URL.createObjectURL(this.image)
+                : require("@/assets/user-image.png");
+            } else {
+                return this.userData.imageURL
+                ? this.userData.imageURL
+                : require("@/assets/user-image.png");
+            }
         },
     },
 }
