@@ -7,7 +7,7 @@
     <div class="botones">
     <button class="boton borrar"></button>
 
-    <button class="boton modificar"></button>
+    <button class="boton modificar" @click="goModificar()" ></button>
 
     <button v-if="this.$route.params.user == 'facilitador'" @click="goVincular()" class="boton vincular"></button>
     </div>
@@ -34,7 +34,11 @@ export default {
   methods:{
     goVincular() {
       this.$router.push({name: 'Vincular', params:{id: this.user.id}});
-    }
+    },
+
+    goModificar() {
+      this.$router.push({name: 'Modificar', params:{user: this.user.id}});
+    },
   }
 }
 </script>

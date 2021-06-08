@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <button v-if="this.$route.name == 'Creacion'" class="add as-center" @click="doRegister">Crear</button>
-                <button v-else class="add as-center" @click="doModify">Crear</button>
+                <button v-else class="add as-center" @click="doModify">Modificar</button>
             </div>
         </div>
     </div>
@@ -112,7 +112,6 @@ export default {
         this.userData.apellidos = user.Apellidos
         this.userData.apodo = user.Apodo
         this.userData.imageURL = user.Imagen
-        this.image = user.Imagen
 
         /*app
             .auth()
@@ -203,20 +202,11 @@ export default {
 
         async doModify() {
             //Comprobar campos llenos
-            if (this.userData.email == ""){
-                this.$toast.error("Email vacío")
-                return
-            } else if(this.userData.password == ""){
-                this.$toast.error("Introduzca contraseña")
-                return
-            } else if(this.userData.nombre == ""){
+            if(this.userData.nombre == ""){
                 this.$toast.error("Introduzca nombre")
                 return
             } else if(this.userData.apellidos == ""){
                 this.$toast.error("Introduzca un apellido")
-                return
-            } else if(!this.image){
-                this.$toast.error("Introduzca una imagen identificativa")
                 return
             }
 
@@ -228,17 +218,19 @@ export default {
                 //Actualizar email
 
                 //Subir imagen
-                this.imageURL = await this.$store.dispatch("users/uploadUserImage", {
-                    file: this.image,
-                    userID: this.$route.params.user,
-                });
+                if(this.image){
+                    this.userData.imageURL = await this.$store.dispatch("users/uploadUserImage", {
+                        file: this.image,
+                        userID: this.$route.params.user,
+                    });
+                }
 
                 //Crear documento con la información del usuario
                 const user = {
                     Nombre: this.userData.nombre,
                     Apellidos: this.userData.apellidos,
                     Apodo: this.userData.apodo,
-                    Imagen: this.imageURL,
+                    Imagen: this.userData.imageURL,
                 };
                 await db.collection("users").doc(this.$route.params.user).update(user)
                 this.$toast.success("Usuario modificado")
@@ -312,14 +304,12 @@ export default {
 
     computed: {
         userImage() {
-            if (this.$route.name == 'Creacion'){
-                return this.image
-                ? URL.createObjectURL(this.image)
-                : require("@/assets/user-image.png");
+            if(this.userData.imageURL){
+                return this.userData.imageURL;
+            } else if (this.image) {
+                return URL.createObjectURL(this.image);
             } else {
-                return this.userData.imageURL
-                ? this.userData.imageURL
-                : require("@/assets/user-image.png");
+                return require("@/assets/user-image.png");
             }
         },
     },

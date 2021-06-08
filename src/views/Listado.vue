@@ -63,6 +63,11 @@ export default {
         listPersonas: [],
       }
   },
+
+  mounted(){
+    this.listFacilitadores = this.facilitadores
+    this.listPersonas = this.personas
+  },
   
   methods:{
     goCreacion(bool) {
