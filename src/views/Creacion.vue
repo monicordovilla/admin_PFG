@@ -109,6 +109,15 @@ export default {
         this.userData.apodo = user.Apodo
         this.userData.imageURL = user.Imagen
         this.userData.image = user.Imagen
+
+        auth.getUser(this.$route.params.user)
+            .then((userRecord) => {
+                // See the UserRecord reference doc for the contents of userRecord.
+                console.log(`Successfully fetched user data: ${userRecord.toJSON()}`);
+            })
+            .catch((error) => {
+                console.log('Error fetching user data:', error);
+            });
     },
   
     methods:{
