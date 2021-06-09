@@ -5,9 +5,9 @@
       <p class="apodo">Apodo: {{user.Apodo}}</p>
     </div>
     <div class="botones">
-    <button class="boton borrar"></button>
+    <button class="boton borrar" @click="deleteUser()"></button>
 
-    <button class="boton modificar" @click="goModificar()" ></button>
+    <button class="boton modificar" @click="goModificar()"></button>
 
     <button v-if="this.$route.params.user == 'facilitador'" @click="goVincular()" class="boton vincular"></button>
     </div>
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { db } from "../firebase";
 
 export default {
   name: 'CajaInfo',
@@ -39,7 +40,15 @@ export default {
     goModificar() {
       this.$router.push({name: 'Modificar', params:{user: this.user.id}});
     },
-  }
+
+    deleteUser(){
+      db.collection("users").doc(this.user.id).delete().then(() => {
+        this.$toast.success(`Se ha eliminado a ${this.user.Nombre} ${this.user.Apellidos} correctamente`);
+      }).catch((error) => {
+        this.$toast.error("Error removing document: ", error);
+      });
+    },
+  },
 }
 </script>
 
